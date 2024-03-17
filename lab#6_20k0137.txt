@@ -1,0 +1,129 @@
+const int LEFT_SENSOR_PIN = A0;   // define the left sensor pin
+const int RIGHT_SENSOR_PIN = A1;  // define the right sensor pin
+const int LEFT_MOTOR = 5;         // define the left motor pin
+const int RIGHT_MOTOR = 6;        // define the right motor pin
+
+void setup() {
+  pinMode(LEFT_SENSOR_PIN, INPUT);   // set the left sensor pin as an input
+  pinMode(RIGHT_SENSOR_PIN, INPUT);  // set the right sensor pin as an input
+  pinMode(LEFT_MOTOR, OUTPUT);       // set the left motor pin as an output
+  pinMode(RIGHT_MOTOR, OUTPUT);      // set the right motor pin as an output
+}
+
+void loop() {
+  int leftSensorValue = analogRead(LEFT_SENSOR_PIN);    // read the left sensor value
+  int rightSensorValue = analogRead(RIGHT_SENSOR_PIN);  // read the right sensor value
+
+  // adjust the motor speeds based on the sensor values
+  if (leftSensorValue > 500 && rightSensorValue > 500) {
+    // both sensors detect white, stop the motors
+    digitalWrite(LEFT_MOTOR, LOW);
+    digitalWrite(RIGHT_MOTOR, LOW);
+  } else if (leftSensorValue > 500) {
+    // left sensor detects white, turn right
+    digitalWrite(LEFT_MOTOR, HIGH);
+    digitalWrite(RIGHT_MOTOR, LOW);
+  } else if (rightSensorValue > 500) {
+    // right sensor detects white, turn left
+    digitalWrite(LEFT_MOTOR, LOW);
+    digitalWrite(RIGHT_MOTOR, HIGH);
+  } else {
+    // both sensors detect black, move forward
+    digitalWrite(LEFT_MOTOR, HIGH);
+    digitalWrite(RIGHT_MOTOR, HIGH);
+  }
+}
+
+######################## TASK # 1 ENDS #########################################
+
+
+const int LED_PIN = 9;  // define the LED pin
+int brightness = 0;     // initial brightness value
+int fadeAmount = 5;     // amount to fade the LED by
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);  // set the LED pin as an output
+}
+
+void loop() {
+  analogWrite(LED_PIN, brightness);  // set the LED brightness using PWM
+  brightness += fadeAmount;          // change the brightness by the fade amount
+
+  // reverse the fade direction if brightness reaches 0 or 255
+  if (brightness <= 0 || brightness >= 255) {
+    fadeAmount = -fadeAmount;
+  }
+
+  delay(30);  // wait a short time to see the effect
+}
+
+
+##################### TASK # 2 ENDS ###################################
+
+
+import RPi.GPIO as GPIO
+import time
+
+# set the GPIO mode to BCM
+GPIO.setmode(GPIO.BCM)
+
+# define the GPIO pins for the LEDs
+led_pins = [17, 18, 27, 22]
+
+# set up the GPIO pins as outputs
+for pin in led_pins:
+    GPIO.setup(pin, GPIO.OUT)
+
+# define the values to write to the LEDs
+led_values = [
+    [1, 0, 0, 0],  # turn on LED 1
+    [0, 1, 0, 0],  # turn on LED 2
+    [0, 0, 1, 0],  # turn on LED 3
+    [0, 0, 0, 1]   # turn on LED 4
+]
+
+# loop through the LED values and write them to the GPIO pins
+for value in led_values:
+    for i in range(len(led_pins)):
+        GPIO.output(led_pins[i], value[i])
+    time.sleep(3)  # delay for 3 seconds
+
+# cleanup the GPIO pins
+GPIO.cleanup()
+
+############################## TASK # 4 ENDS  ################################
+
+
+Raspberry Pi and Arduino are popular platforms for building electronic projects and Internet of Things (IoT) devices. Although they share some similarities, they have different technical characteristics that make them better suited for their tasks.
+A complete computer with a single board, the Raspberry Pi runs a Linux-based operating system. Its CPU, Memory, GPU, and other hardware enable it to run a variety of software programs. Due to its extreme versatility, the Raspberry Pi is utilized in a
+wide range of projects, including media centers, gaming consoles, and web servers.
+The microcontroller platform Arduino, on the other hand, is made for straightforward and repeated operations.Compared to the Raspberry Pi, it consumes less energy.
+Robotics, home automation, and sensor projects, which call for real-time control or sense, are better suited for the Arduino. 
+The processing power of Raspberry Pi and Arduino is one of their main differences.The Raspberry Pi's more potent CPU and GPU enable it to execute sophisticated software programs and process more data.
+Contrarily, the Arduino contains a less complex microprocessor that is more appropriate for straightforward operations and real-time control.Their interactions with the outside world are another distinction.
+Input and output options for the Raspberry Pi include HDMI, USB, Ethernet, and GPIO (General Purpose Input/Output) pins, among others. This facilitates sensor and other device connectivity.
+The input and output possibilities for the Arduino are fewer, but it offers a large selection of analog and digital pins that are used for sensing and control. 
+Both the Raspberry Pi and the Arduino can be used to create AI-enabled gadgets, although they serve different purposes.
+AI applications that involve data processing and machine learning are better suited for the Raspberry Pi.
+For instance, a Raspberry Pi can be used to create a smart camera that employs computer vision algorithms to detect objects and identify faces.
+The Raspberry Pi can also be used to create chatbots and voice assistants that communicate with users by using natural language processing. 
+On the other hand, Arduino is more appropriate for AI applications that need real-time control and sensing.
+For instance, a robot that can use sensors to navigate its environment and make decisions in real-time can be created with an Arduino.
+The Arduino may be used to create smart home appliances that can track and manage environmental conditions using sensor data. 
+A smart greenhouse is a project that uses both Raspberry Pi and Arduino for AI.
+Monitoring environmental information like temperature, humidity, and light levels is possible with a Raspberry Pi.
+To improve the environment for plant growth, it can also execute machine learning algorithms.
+Based on the data gathered by the Raspberry Pi, an Arduino may be used to operate the watering and fertilizer systems in real-time. 
+
+
+
+############################## TASK # 5 ENDS ####################################################3
+
+
+
+
+
+
+
+
+
